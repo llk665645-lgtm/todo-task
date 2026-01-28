@@ -67,7 +67,7 @@ button:hover {
 
 .stats{
   margin-bottom: 20px;
-  color: aqua;
+  color: rgb(255, 255, 255);
 }
 ul {
   list-style-type: none;

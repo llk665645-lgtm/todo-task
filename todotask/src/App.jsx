@@ -8,6 +8,29 @@ export default function App() {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const[seconds, setSeconds] = useState(0);
+  useEffect(()=> {
+    setInterval(() => {
+      setSeconds(totalSeconds => totalSeconds + 1);
+    }, 1000);
+    return () => clearInterval();
+  }, []);
+
+//       import { useState, useEffect } from 'react';
+
+// export default function Counter() {
+//   const [count, setCount] = useState(0);
+
+//   useEffect(() => {
+//     const intervalId = setInterval(() => {
+//       setCount(c => c + 1); // ✅ Pass a state updater
+//     }, 1000);
+//     return () => clearInterval(intervalId);
+//   }, []); // ✅ Now count is not a dependency
+
+//   return <h1>{count}</h1>;
+// }
+
 
   useEffect(()=> {localStorage.setItem('todos', JSON.stringify(todos))
 }, [todos]);
@@ -73,9 +96,11 @@ export default function App() {
         ))}
       </ul>
 
-      <div className='Stats'>
+      <div className='stats'>
         <p>Total Tasks: {total}</p>
         <p>Completed Tasks: {done}</p>
+        <p>Completed percents:{total > 0 ? Math.round((done*100/total)): 0}%</p>
+        <p>Time: {Math.floor(seconds/60)}min {seconds % 60}s </p>
       </div>
     </div>
   );
